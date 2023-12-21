@@ -89,7 +89,7 @@ Add-WUServiceManager -ServiceID "7971f918-a847-4430-9279-4a52d1efe18d" -AddServi
 # Install all available updates
 $ts = get-date -f "yyyy/MM/dd hh:mm:ss tt"
 Write-Host "$ts Installing updates."
-Install-WindowsUpdate -AcceptAll -IgnoreReboot -Verbose | Select Title, KB, Result | Format-Table
+Install-WindowsUpdate -Criteria "IsInstalled=0 and Type='Software'" -AcceptAll -IgnoreReboot -Verbose | Select Title, KB, Result | Format-Table
 $needReboot = (Get-WURebootStatus -Silent).RebootRequired
 
 # Specify return code
